@@ -9,9 +9,6 @@ public class lab2_GaussSeidel {
         double[] old_X = new double[N];
         scan(A, old_X, new_X);
         gauss_zen_method(A, old_X, new_X);
-        print(A);
-        printt(old_X);
-        printt(new_X);
     }
     static void scan(double [][] A, double [] old_X, double [] new_X) throws Exception {
         Scanner scanner = new Scanner(new File("data.txt"));
@@ -55,7 +52,6 @@ public class lab2_GaussSeidel {
                         new_X[i] -= A[i][j] * old_X[j];
                     }
                 }
-                printt(new_X);
                 new_X[i] /= A[i][i];
             }
             for(int i = 1; i < N-1; i++){
@@ -63,10 +59,11 @@ public class lab2_GaussSeidel {
                     flag = 0;
                 }
             }
-            for(int k = 0; k < N; k++){
-                old_X[k] = new_X[k];
-            } 
+            for(int i=0;i<N;i++){
+                old_X[i]=new_X[i];
+            }
         } while(flag == 1);        
+        printt(old_X);
     } 
 }
 
