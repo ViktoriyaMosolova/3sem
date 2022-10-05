@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class lab2_GaussSeidel {
+public class lab2_GaussSeidel_beta {
     public static int N = 6;
     public static void main(String[] args) throws Exception {
         double[][] A = new double[N][N];
