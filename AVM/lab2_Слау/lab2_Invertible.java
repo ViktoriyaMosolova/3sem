@@ -78,13 +78,11 @@ public class lab2_Invertible {
         for (int i = 0; i < N; i++) {
             X[i][0] = 0;
         }
-         for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                X[i][0] += E[i][j]*B[j][0];
             }
-         }
-        print(E);
-        print(B);
+        }
         print(X);
     }
 }

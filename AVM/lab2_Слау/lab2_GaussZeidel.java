@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class lab2_GaussZeidel {
-    public static int N = 2;
+    public static int N = 6;
     public static double v = 1;
     public static double g = 0.70;
     public static void main(String[] args) throws Exception {
@@ -20,6 +20,7 @@ public class lab2_GaussZeidel {
             System.out.println("-");
         }*/
         matrix_c_d(a,b,c,d);
+        norm(c);
         method(c,d,old_x,new_x,error);
         printt(new_x);
     }
@@ -88,6 +89,16 @@ public class lab2_GaussZeidel {
                 }
             }
         }
+    }
+    static void norm(double [][] c) {
+        double n = 0;
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                n += c[i][j] * c[i][j];
+            }
+        }
+        n = Math.sqrt(n);
+        System.out.println(n);
     }
     static double la(double a){
         return -(Math.signum(a) * v)/(g + Math.abs(a));
