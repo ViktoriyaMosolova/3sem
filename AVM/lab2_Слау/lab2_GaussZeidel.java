@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 public class lab2_GaussZeidel {
     public static int N = 6;
-    public static double v = 1;
-    public static double g = 0.70;
+    public static double v = 0.1;
+    public static double g = 1;
+    public static double e = 0.1;
     public static void main(String[] args) throws Exception {
         double[][] a = new double[N][N];
         double[] b = new double[N];
@@ -21,13 +22,20 @@ public class lab2_GaussZeidel {
         }*/
         matrix_c_d(a,b,c,d);
         norm(c);
+        //print(a);
+        //printt(b);
+        //System.out.println("c[i][j]:");
+        //print(c);
         method(c,d,old_x,new_x,error);
+        System.out.printf(v + "=v " + g + "=g " + e + "=e");
+        System.out.println();
+        System.out.println("x[i]:");
         printt(new_x);
     }
     static void print(double [][] matrix) {
         for(int i = 0; i < matrix.length; i++){
             for (int j = 0; j < matrix[i].length; j++) {
-                System.out.printf("%6.2f", matrix[i][j]);
+                System.out.printf("%-7.2f", matrix[i][j]);
                 if(j < matrix[i].length - 1) System.out.printf(" ");
             }
             System.out.println();
@@ -36,13 +44,13 @@ public class lab2_GaussZeidel {
     }
     static void printt(double [] matrix) {
         for(int i = 0; i < matrix.length; i++){
-            System.out.printf("%6.2f", matrix[i]);
+            System.out.printf("%-7.2f", matrix[i]);
             System.out.println();
         }
         System.out.println();
     }
     static void scan(double [][] a, double [] b, double [] old_x) throws Exception {
-        Scanner scanner = new Scanner(new File("test.txt"));
+        Scanner scanner = new Scanner(new File("tests.txt"));
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < N+1; j++) {
                 if(j == N) {
@@ -98,20 +106,20 @@ public class lab2_GaussZeidel {
             }
         }
         n = Math.sqrt(n);
-        System.out.println(n);
+        System.out.println("norm: " + n);
     }
     static double la(double a){
         return -(Math.signum(a) * v)/(g + Math.abs(a));
     }
     static void method(double [][] c, double [] d, double [] old_x, double [] new_x, double [] error) {
+        int counter = 0;
         double max = 1;
         do{
             for(int i = 0; i < N; i++){
-                new_x[i] = 0;
+                new_x[i] = d[i];
                 for(int j = 0; j < N; j++){
                     new_x[i]+=c[i][j]*old_x[j];
                 }
-                new_x[i] += d[i];
                 error[i] = Math.abs(old_x[i]-new_x[i]);
                 old_x[i] = new_x[i];
             }
@@ -119,6 +127,8 @@ public class lab2_GaussZeidel {
             for (int i = 0; i < N; i++) {
                 max = Math.max(max, error[i]);
             }
-        } while (max >= 0.1);
+            counter++;
+        } while (max >= e);
+        System.out.println("count: " + counter);
     }
 }
