@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class lab2_GaussZeidel {
     public static int N = 6;
-    public static double v = 0.1;
+    public static double v = 0.5;
     public static double g = 1;
     public static double e = 0.1;
     public static void main(String[] args) throws Exception {
@@ -14,23 +14,18 @@ public class lab2_GaussZeidel {
         double[] old_x = new double[N];
         double[] new_x = new double[N];
         double[] error = new double[N];
+        double[] error_old = new double[N];
         scan(a, b, old_x);
-        /*if (diagonal(A) == 1) {
-            System.out.println("+");
-        } else {
-            System.out.println("-");
-        }*/
         matrix_c_d(a,b,c,d);
         norm(c);
         //print(a);
         //printt(b);
-        //System.out.println("c[i][j]:");
-        //print(c);
-        method(c,d,old_x,new_x,error);
-        System.out.printf(v + "=v " + g + "=g " + e + "=e");
-        System.out.println();
-        System.out.println("x[i]:");
-        printt(new_x);
+        System.out.println("c[i][j]:");
+        print(c);
+        method(c,d,old_x,new_x,error, error_old);
+        System.out.println(v + "=v " + g + "=g " + e + "=e");
+        //System.out.println("x[i]:");
+        //printt(new_x);
     }
     static void print(double [][] matrix) {
         for(int i = 0; i < matrix.length; i++){
@@ -43,14 +38,13 @@ public class lab2_GaussZeidel {
         }
     }
     static void printt(double [] matrix) {
-        for(int i = 0; i < matrix.length; i++){
-            System.out.printf("%-7.2f", matrix[i]);
-            System.out.println();
+        for(int i = 0; i < 1; i++){
+            System.out.printf("%-10.2f", matrix[5]);
         }
         System.out.println();
     }
     static void scan(double [][] a, double [] b, double [] old_x) throws Exception {
-        Scanner scanner = new Scanner(new File("tests.txt"));
+        Scanner scanner = new Scanner(new File("data.txt"));
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < N+1; j++) {
                 if(j == N) {
@@ -111,8 +105,8 @@ public class lab2_GaussZeidel {
     static double la(double a){
         return -(Math.signum(a) * v)/(g + Math.abs(a));
     }
-    static void method(double [][] c, double [] d, double [] old_x, double [] new_x, double [] error) {
-        int counter = 0;
+    static void method(double [][] c, double [] d, double [] old_x, double [] new_x, double [] error, double [] error_old) {
+        int counter = 1;
         double max = 1;
         do{
             for(int i = 0; i < N; i++){
@@ -122,13 +116,29 @@ public class lab2_GaussZeidel {
                 }
                 error[i] = Math.abs(old_x[i]-new_x[i]);
                 old_x[i] = new_x[i];
+                if(counter > 1){
+                    condition(error[i], error_old[i]);
+                }
+            }
+            //System.out.print(counter + " ");
+            printt(new_x);
+            for(int i = 0; i < N; i++){
+                error_old[i]=error[i];
             }
             max = error[0];
             for (int i = 0; i < N; i++) {
                 max = Math.max(max, error[i]);
             }
             counter++;
-        } while (max >= e);
-        System.out.println("count: " + counter);
+        } while (counter <= 100);
+    }
+    static void condition(double error, double error_old){
+        if(error_old > error){
+            //System.out.printf("old = %-5.2f > %-5.2f = new", error_old, error);
+            //System.out.println();
+        } else {
+            //System.out.printf("old = %-5.2f <= %-5.2f = new", error_old, error);
+            //System.out.println();
+        }
     }
 }
