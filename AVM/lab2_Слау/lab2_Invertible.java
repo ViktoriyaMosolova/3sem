@@ -14,7 +14,7 @@ public class lab2_Invertible {
         multi(B, E, X);
     }
     static void scan(double [][] A, double [][] B) throws Exception {
-        Scanner scanner = new Scanner(new File("test.txt"));
+        Scanner scanner = new Scanner(new File("data.txt"));
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < N+1; j++) {
                 if(j == N) {

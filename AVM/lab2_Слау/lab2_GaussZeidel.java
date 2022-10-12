@@ -16,16 +16,22 @@ public class lab2_GaussZeidel {
         double[] error = new double[N];
         double[] error_old = new double[N];
         scan(a, b, old_x);
+        //System.out.println("old_x[i]:");
+        //printt(old_x);
         matrix_c_d(a,b,c,d);
-        norm(c);
+        //norm(c);
+        //System.out.println("a[i][j]:");
         //print(a);
+        //System.out.println("b[i]:");
         //printt(b);
-        System.out.println("c[i][j]:");
-        print(c);
+        //System.out.println("c[i][j]:");
+        //print(c);
         method(c,d,old_x,new_x,error, error_old);
+        //System.out.println("d[i]:");
+        //printt(d);
         System.out.println(v + "=v " + g + "=g " + e + "=e");
-        //System.out.println("x[i]:");
-        //printt(new_x);
+        System.out.println("x[i]:");
+        printt(new_x);
     }
     static void print(double [][] matrix) {
         for(int i = 0; i < matrix.length; i++){
@@ -38,8 +44,8 @@ public class lab2_GaussZeidel {
         }
     }
     static void printt(double [] matrix) {
-        for(int i = 0; i < 1; i++){
-            System.out.printf("%-10.2f", matrix[5]);
+        for(int i = 0; i < N; i++){
+            System.out.printf("%-10.2f", matrix[i]);
         }
         System.out.println();
     }
@@ -70,10 +76,8 @@ public class lab2_GaussZeidel {
             if(sum > a[i][i]) {
                 k = 0;
                 System.out.println(a[i][i] + "<" + sum);
-                //System.out.println("no");
             } else {
-                //System.out.println(a[i][i] + ">" + sum);
-                System.out.println("yes");
+                System.out.println(a[i][i] + ">" + sum);
             }
         }
         return k;
@@ -120,8 +124,8 @@ public class lab2_GaussZeidel {
                     condition(error[i], error_old[i]);
                 }
             }
-            //System.out.print(counter + " ");
-            printt(new_x);
+            //System.out.print(counter + "=counter\n");
+            //printt(new_x);
             for(int i = 0; i < N; i++){
                 error_old[i]=error[i];
             }
@@ -130,7 +134,7 @@ public class lab2_GaussZeidel {
                 max = Math.max(max, error[i]);
             }
             counter++;
-        } while (counter <= 100);
+        } while (max > e);
     }
     static void condition(double error, double error_old){
         if(error_old > error){
