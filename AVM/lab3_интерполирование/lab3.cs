@@ -2,7 +2,7 @@
  
 namespace ConsoleApp
 {
-    class Program
+    class lab3
     {
         const int N = 16;
         static void Main()
@@ -15,9 +15,20 @@ namespace ConsoleApp
                 dValues[i] = new double[N-i];
                 dValues[i][0] = yValues[i];
             }
-
+            using (StreamReader sr = new StreamReader("theoria.txt", System.Text.Encoding.Default))
+            {
+               
+               int len = sr.ReadToEnd().Length;
+               string[] arrTheoria = new string[len];
+               for (int i = 0; i < len; i++)
+                {
+                    arrTheoria[i] = sr.ReadLine();
+                    Console.WriteLine(arrTheoria[i]);
+                }
+                Console.ReadLine();
+            }
            dif(dValues);
-           print_dif(dValues);
+           //print_dif(dValues);
            dm(dValues, d);
            optim_d(dValues, d);
         }
@@ -50,36 +61,39 @@ namespace ConsoleApp
                     else min[i-1] = dValues[j][i];
                 }
                 d[i-1]=max[i-1]-min[i-1];
-                Console.Write("{0,-10:f2}", d[i-1]);
+                //Console.Write("{0,-10:f2}", d[i-1]);
             }
-            Console.WriteLine();
+            //Console.WriteLine();
         }
         static void optim_d(double[][] dValues, double[] d){
             double min = d[0];
+            int k = 0;
             for(int i = 0; i < N-2; i++){
-                    if(d[i] < min) min = d[i];
+                if(d[i] < min) {
+                    min = d[i];
+                    k = i;
+                }
             }
             Console.WriteLine("{0,-10:f2}", min);
+            Console.WriteLine("optimum: {0}", k+1);
         }
+        static void del(double[] xValues, double[] yValues){
+                
+        }
+
         static double InterpolateLagrangePolynomial (double x, double[] xValues, double[] yValues)
         {
             double lagrangePol = 0;
- 
-            for (int i = 0; i < N; i++)
-            {
+            for (int i = 0; i < N; i++) {
                     double basicsPol = 1;
-                    for (int j = 0; j < N; j++)
-                    {
-                        if (j != i)
-                        {
-                            basicsPol *= (x - xValues[j])/(xValues[i] - xValues[j]);
-                            
+                    for (int j = 0; j < N; j++) {
+                        if (j != i) {
+                            basicsPol *= (x - xValues[j])/(xValues[i] - xValues[j]);   
                         }
                     }
                     Console.WriteLine(basicsPol);
                     lagrangePol += basicsPol * yValues[i];
             }
-
             return lagrangePol;
         }
     }
