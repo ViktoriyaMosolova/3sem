@@ -1,5 +1,4 @@
-git status 
+git status
 git add .
 git status
-DATE = $(date)
-git commit -m "$(DATE)"
+git commit -m "%m-%d-%y" 
