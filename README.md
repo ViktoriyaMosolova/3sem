@@ -18,5 +18,5 @@
 Лабы гугл диски     
 https://drive.google.com/drive/folders/1OEa3TE2bblTOm-xRl6l476xgh-yW41QQ?usp=sharing    
 https://drive.google.com/drive/folders/1zWcm5BMvIqfdqrbtWs4TQixbISCq6ufr
-https://drive.google.com/drive/folders/1zWcm5BMvIqfdqrbtWs4TQixbISCq6ufr
+https://drive.google.com/drive/folders/1zWcm5BMvIqfdqrbtWs4TQixbISCq6ufr    
 Студфайлс https://studfile.net/rhtu/174/folder:1479/#571344    
