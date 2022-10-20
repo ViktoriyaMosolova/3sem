@@ -1,7 +1,7 @@
+DATE = $(date)
+
 all:
-	git status
-	git add .
-	git status
-	git commit -m "10.22"
+	mydir=$(DATE)
+	echo $(mydir)
 push:
 	git push origin master
