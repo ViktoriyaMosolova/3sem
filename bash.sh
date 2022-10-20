@@ -1,5 +1,5 @@
 git status
 git add .
 git status
-d = $(%m-%d-%y)
-git commit -m +$(d)
+d = $(git commit -m +"%m-%d-%y")
+echo $(d)
