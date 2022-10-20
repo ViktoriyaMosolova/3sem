@@ -1,5 +1,5 @@
 git status 
 git add .
 git status
-DATE = echo $(date)
+DATE = $(date)
 git commit -m "$(DATE)"
