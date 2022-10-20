@@ -1,7 +1,7 @@
-DATE = $(date)
-
 all:
-	mydir=$(DATE)
-	echo $(mydir)
-push:
+	git status 
+	git add .
+	git status
+	DATE = echo $(date)
+	git commit -m "$(DATE)"
 	git push origin master
