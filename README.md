@@ -13,7 +13,8 @@
 Презентации https://drive.google.com/drive/folders/1msMwz_yxVjjpXxsFe_u6wcU6Eweeka8a
 ## ПрогИнж Лабы
 Гугл диск с лабами https://drive.google.com/drive/folders/14GzgMon2mdkwYSoMOaPyN_YGHTNTXXgN    
-Блог https://t.me/zdrth6
+Блог https://t.me/zdrth6    
+Журнал https://disk.yandex.ru/edit/d/qDhwLf2WkcgntNEhZ988HSPegnqahzm72s0qoIz-cKg6QmNMWTRSOHdkdw
 ## Физика
 Лабы гугл диски     
 https://drive.google.com/drive/folders/1OEa3TE2bblTOm-xRl6l476xgh-yW41QQ?usp=sharing    

@@ -1,21 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int stack[10];
-void push(int x, int *);
-void pop(int *);
+void push(int x, int *, int stack[]);
+void pop(int *, int *);
 int main() {
-    int stack[10];
+    int stack[10]={0,1,2,3,4,5,6,7,8,9};
     int tos = 0;
-    push(1, &tos);
-    push(2, &tos);
-    push(3, &tos);
-    pop(&tos);
-    pop(&tos);
+    push(5, &tos, stack);
+    pop(&tos, stack);
     return 0;
 }
 
-void push(int x, int *tos) {
+void push(int x, int *tos, int stack[]) {
     if(*tos >= 10) {
         printf("full");
     } else {
@@ -24,7 +20,7 @@ void push(int x, int *tos) {
     }
 }
 
-void pop(int *tos) {
+void pop(int *tos, int *stack) {
     if(*tos == 0) {
         printf("0");
     } else {
