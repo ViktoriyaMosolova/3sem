@@ -3,7 +3,7 @@ typedef int T;
 
 typedef struct Stack_tag {
     T data[STACK_MAX_SIZE];
-    size_t size;
+    int size;
 } Stack_t;
 
 void push(Stack_t *stack, const T value) {
