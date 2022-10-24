@@ -19,8 +19,6 @@ void add_element(t_list **l, int data) {
     *l = add_element;
 }
 
-
-
 int main() {
     t_list *l = create_element(1);
     add_element(&l, 2);
