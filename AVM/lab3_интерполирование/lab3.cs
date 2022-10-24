@@ -36,7 +36,7 @@ namespace ConsoleApp
                     }
                 }
             }
-            return f;
+            return 0;
         }
 
         /*static void print_dif (double[][] dValues) {
