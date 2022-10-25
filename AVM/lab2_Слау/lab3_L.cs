@@ -10,6 +10,7 @@ namespace ConsoleApp
         static void Main()
         {
             double [] xPoint = {-3, 0.85, 4.70};
+            double [] x = {-3, -2.45, -1.90, -1.35, -0.80, -0.25, 0.30, 0.85, 1.40, 1.95, 2.50, 3.05, 3.60, 4.15, 4.70, 5.25};
             double [] yPoint = {-14.92, -6.35, 0.07};
             double [] f = new double[count];
             /*double[][] dValues = new double[N][];
@@ -22,12 +23,11 @@ namespace ConsoleApp
             print_dif(dValues);
             dm(dValues, d);
             optim_d(dValues, d);*/
-            function_L(xPoint, yPoint, f);
+            function_L(x, xPoint, yPoint, f);
             print(f);
         }
 
-        static void function_L(double[] xP, double[] yP, double[] f) {
-            double [] x = {-3, -2.45, -1.90, -1.35, -0.80, -0.25, 0.30, 0.85, 1.40, 1.95, 2.50, 3.05, 3.60, 4.15, 4.70, 5.25};
+        static void function_L(double[] x, double[] xP, double[] yP, double[] f) {
             for(int k = 0; k < count; k++) {
                 f[k] = 0;
                 for(int i = 0; i < N; i++) {
@@ -61,8 +61,8 @@ namespace ConsoleApp
                     dValues[i][j+1] = dValues[i+1][j] - dValues[i][j];
                 }
             }
-        }
-        static void dm (double[][] dValues, double[] d) {
+        }*/
+        /*static void dm (double[][] dValues, double[] d) {
             double [] max = new double[N-1];
             double [] min = new double[N-1];
             
@@ -88,8 +88,8 @@ namespace ConsoleApp
             }
             Console.WriteLine("{0,-10:f2}", min);
             Console.WriteLine("optimum: {0}", k+1);
-        }
-        static void del(double[] xValues, double[] yValues){
+        }*/
+        /*static void del(double[] xValues, double[] yValues){
                 
         }*/
     }
