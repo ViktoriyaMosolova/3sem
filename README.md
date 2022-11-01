@@ -15,6 +15,8 @@
 Гугл диск с лабами https://drive.google.com/drive/folders/14GzgMon2mdkwYSoMOaPyN_YGHTNTXXgN    
 Блог https://t.me/zdrth6    
 Журнал https://disk.yandex.ru/edit/d/qDhwLf2WkcgntNEhZ988HSPegnqahzm72s0qoIz-cKg6QmNMWTRSOHdkdw
+## Питон
+Журнал https://docs.google.com/spreadsheets/d/14s1G-4wBMGh6Sflcqd2H23wFpmSnySXUKOvm0MNBOvA/edit
 ## Физика
 Лабы гугл диски     
 https://drive.google.com/drive/folders/1OEa3TE2bblTOm-xRl6l476xgh-yW41QQ?usp=sharing    
