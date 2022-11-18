@@ -25,11 +25,10 @@ void reading_data(double *x, double *y, double *dx, double *x_p, double a[]) {
 void method_euler(double x_init, double y_init, double a[], double dx, double x_point) {
     printf("y_e: \n");
     while (x_init >= x_point) {
-        printf("f(%.2lf)=%-10.2lf\n", x_init,y_init);
         y_init += dx * f(x_init, y_init, a);
+        printf("f(%.2lf)=%-10.2lf\n", x_init,y_init);
         x_init -= dx;
     }
-    printf("f(%.2lf)=%-10.2lf\n", x_init,y_init);
 }
 void method_modified_euler(double x_init, double y_init, double a[], double dx, double x_point) {
     printf("y_em: \n");
@@ -38,7 +37,6 @@ void method_modified_euler(double x_init, double y_init, double a[], double dx, 
         x_init -= dx;
         y_init += dx * f((x_init + dx / 2), (y_init + (dx / 2) * f(x_init, y_init, a)), a);
     }
-    printf("f(%.2lf)=%-10.2lf\n", x_init,y_init);
 }
 double f(double x, double y, double a[]) {
     return a[0] + a[1] * x + a[2] * x * x + a[3] * y + a[4] * x * y;

@@ -27,7 +27,8 @@ namespace ConsoleApp
             }
             finite_differences(dValues);//конечные разности
             print_finite_differences(x_init, dValues);//вывод таблицы конечных разностей
-            dif_finite_differences(dValues, dif); //величина разности между максимальным и минимальным значениями конечных разностей порядков
+            dif_finite_differences(dValues, dif); //величина разности между максимальным
+            // и минимальным значениями конечных разностей порядков
             optim_dif(dif);//оптимальная степень полинома
 
 
@@ -38,6 +39,18 @@ namespace ConsoleApp
             error_L(f, y_init);//среднеквадратичная ошибка Лагранжа
 
             separated_differences(x1, sep_dif);
+            Console.Write("{0,-10}{1,-10}", "x", "y");
+            for(int i = 1; i < N1; i++){
+                Console.Write("q" + "{0,-9}", i);
+            }
+            Console.WriteLine();
+            for(int i = 0; i < N1; i++){
+                Console.Write("{0,-10:f2}", x1[i]);
+                for(int j = 0; j < N1 - i; j++){
+                    Console.Write("{0,-10:f2}", sep_dif[i][j]);
+                }
+                Console.WriteLine();
+            }
             function_N(x_init, x1, f, sep_dif);
             Console.WriteLine("Method N:");
             print(f);//вывод результатов интерполирования Ньютоном
