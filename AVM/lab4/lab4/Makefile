@@ -1,13 +1,13 @@
 FLAG = -Wall -Werror -Wextra
 CC = gcc
-SRC = lab41.c
-Q1 = lab41
+SRC = lab4.c
+Q1 = lab4
 
-all: lab41
+all: lab4
 
-lab41: lab41.c
+lab4: lab4.c
 	$(CC) $(FLAG) $(SRC) -o $(Q1)
-	./lab41.exe
+	./lab4.exe
 
 clean: 
 	rm -rf $(Q1) *.o *.out
