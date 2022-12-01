@@ -3,35 +3,30 @@ CB – концентрация чистого сахарного раствор
 Рассчитать вязкости растворов сахарозы при интервале температур 10 – 50 oC с шагом 10 oC в
 интервале концентраций СВ = 0 – 50% с шагом 5%
 Сравнить с экспериментальными данными и оценить погрешность вычислений:
-t=40o
-C; CB = 0% ηэксп= 0,65 сП;
-t=50o
-C; CB = 50% ηэксп= 4,94 сП;
-t=30o
-C; CB = 30% ηэксп= 2,50 сП;'''
+t=40oC; CB = 0% ηэксп= 0,65 сП;
+t=50oC; CB = 50% ηэксп= 4,94 сП;
+t=30oC; CB = 30% ηэксп= 2,50 сП;'''
 
 from math import exp
 
-def func(t, x):
-    x1 = (30 - t) / (91 + t)
-    x2 = pow(x,1.25)
-    n = exp(22.46 * x - 0.114 + x1 * (1.1 + 43.1 * x2))
-    return n
+def func(t):
+    x = var_x(sv)
+    return exp(22.46 * x - 0.114 + ((30 - t) / (91 + t)) * (1.1 + 43.1 * pow(x, 1.25)))
 
 def var_x(sv):
-    a = sv / (1900 - 18 * sv)
-    return a
+    return sv / (1900 - 18 * sv)
+
+f=[[40,0,0.65],[50,50,4.94],[30,30,2.5]]
 
 for t in range(10,51,10):
     for sv in range(0,51,5):
-        if (t == 40 and sv == 0) or (t == 50 and sv == 50) or (t == 30 and sv == 30):
-            print('t=' + str(t) + ' sv=' + str(sv))
-            if((t == -91) or ((1900 - 18 * sv) == 0)):
-                print("incorrect input")
-            else:
-                x = var_x(sv)
-                if(x > 0):
-                    print('n=' + str(func(t, x)))
-                    print('diff')
-                else:
-                    print("incorrect input")
+        print('t=%d sv=%d' %(t,sv))
+
+        if ((1900-18*sv == 0) or (var_x(sv) <= 0) or (t==-91)):
+            print('incorrect input\n')
+        else:
+            solution = func(t)
+            for i in range(3):
+                if(t==f[i][0] and sv==f[i][1]):
+                    print('n_real=%.4f\nerror=%.4f' %(f[i][2], f[i][2]-solution))
+            print('n=%.4f\n' %solution)
