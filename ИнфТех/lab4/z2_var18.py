@@ -9,32 +9,36 @@ t=30oC; CB = 30% ηэксп= 2,50 сП;
 
 Повторить п.1. с использованием лямбда-функций и функции map'''
 
-from math import exp
+from math import pow
 
-n = lambda t, sv: exp(22.46 * (sv / (1900 - 18 * sv)) - 0.114 + ((30 - t) / (91 + t)) * (1.1 + 43.1 * pow((sv / (1900 - 18 * sv)), 1.25)))
+n = lambda t, sv: pow(10,(22.46 * (sv / (1900 - 18 * sv)) - 0.114 + ((30 - t) / (91 + t)) * (1.1 + 43.1 * pow((sv / (1900 - 18 * sv)), 1.25))))
 
 f=[[40,0,0.65],[50,50,4.94],[30,30,2.5]]
 
-t_s=[]
-sv_s=[]
-t_n=[]
-sv_n=[]
-ff=[]
+t_s=[];sv_s=[]
+
+t_n=[];sv_n=[];ff=[]
+
 for i in range(10,51,10):
     for j in range(0,51,5):
-            if ((1900-18*j == 0) or (j / (1900 - 18 * j) <= 0) or (i==-91)):
+            if ((1900-18*j == 0) or (i==-91)):
                 continue
             else:    
                 t_s.append(i)
                 sv_s.append(j)
-                for k in range(3):
-                    if(i==f[k][0] and j==f[k][1]):
-                        t_n.append(i)
-                        sv_n.append(j)
-                        ff.append(f[k][2])
 
-'''print(list(map(n,t_s, sv_s)))'''
+for k in range(3):
+    t_n.append(f[k][0])
+    sv_n.append(f[k][1])
+    ff.append(f[k][2])
+
+m=list(map(n,t_s, sv_s))
+mm=list(zip(t_s,sv_s,m))
+print(mm)
+print('\n\n')
+
 k=list(map(n, t_n, sv_n))
-print(k)
 error=list(map(lambda x,y: y-x,k,ff))
-print(error)
+list_ans = list(zip(t_n,sv_n,k,error))
+print(list_ans)
+

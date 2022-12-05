@@ -20,13 +20,12 @@ f=[[40,0,0.65],[50,50,4.94],[30,30,2.5]]
 
 for t in range(10,51,10):
     for sv in range(0,51,5):
-        print('t=%d sv=%d' %(t,sv))
-
         if ((1900-18*sv == 0) or (var_x(sv) <= 0) or (t==-91)):
-            print('incorrect input\n')
+            continue
         else:
             solution = func(t)
             for i in range(3):
                 if(t==f[i][0] and sv==f[i][1]):
+                    print('t=%d sv=%d' %(t,sv))
                     print('n_real=%.4f\nerror=%.4f' %(f[i][2], f[i][2]-solution))
-            print('n=%.4f\n' %solution)
+                    print('n=%.4f\n' %solution)
