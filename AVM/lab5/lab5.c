@@ -1,47 +1,102 @@
+/*3. На Листе 1 привести исходные данные для расчета, указанные в вы-данном варианте задания.
+
+4. На Листе 2 построить график оптимизируемой функции и перечислить координаты ее глобальных и 
+локальных минимумов и максимумов (с точно-стью до 0,5) в указанном интервале локализации.
+
+5. На Листе 3 в табличной форме представить решения задачи оптимиза-ции функции одной переменной 
+для всех экстремумов указанного в варианте задания типа с точностью 0,001.
+
+6. На Листе 4 в табличной форме представить решения задачи оптимиза-ции функции одной переменной 
+для глобального экстремума указанного в ва-рианте задания типа со значениями 
+точности 0,1, 0,01, 0,001, 0,0001.
+
+7. На Листе 5 построить график зависимости количества шагов расчета координаты глобального оптимума 
+от выбранной точности. Для независимой переменной использовать логарифмическую шкалу. 
+
+*/
+//done 1.вывод исходных данных
+//2.построить график оптимизируемой функции и перечислить координаты ее глобальных и 
+//локальных минимумов и максимумов (с точно-стью до 0,5) в указанном интервале локализации
+//узнать: каким(и) методом(ами) определять экстремумы?
+//что значит с точностью до 0,5?
+//надо ли как то обозначать локальный или глобальный это экстремум?
+
+//3.решить задачу оптимизации для золотого сечения, найти лок. и глоб. мин., с точностью 0,001 //или только то что в варианте (мин)? //для всех экстремумом? это и глобальных и локальных или мин и мах?
+
+//done 4.найти глобальный минимум методом ЗС с точностями 0,1 0,01 0,001 0,0001
+//done 5.график зависимости количества шагов расчета координаты глобального оптимума от выбранной точности
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #define N 4
 #define z 0.382
 
-void reading_data(double a[], double*, double*);
-double f(double a[], double);
-void the_golden_ratio(double a[], double, double, double);
-void condition(double, double, double);
+void reading_data(double*, double*);
+double f(double);
+void the_golden_ratio_min(double, double, double);
+
+double k[N];
 
 int main() {
-    double a[N];
-    double x_left, x_right;
-    double e;
-    reading_data(a, &x_left, &x_right);
-    the_golden_ratio(a, x_left, x_right, e);
+    double a, b;
+    reading_data(&a, &b);
+    double e[] = {0.1,0.01,0.001,0.0001};
+    //the_golden_ratio_min(a, b, e[2]);//3task
+    for(int i = 0; i < N; i++) {
+        the_golden_ratio_min(a, b, e[i]);//4task
+    }
     return 0;
 }
 
-void reading_data(double a[], double* x_left, double* x_right) {
+void reading_data(double* a, double* b) {
     FILE* f = fopen("var.txt", "r"); 
     for(int i = 0; i < N; i++) {
-        fscanf(f, "%lf", &a[i]);
-        printf("%4.4lf\n", a[i]);
+        fscanf(f, "%lf", &k[i]);
+        //printf("a[%d]=%4.4lf\n", i, k[i]);
     }
-    fscanf(f,"%lf%lf", x_left, x_right);
-    printf("%4.4lf\n%4.4lf", *x_left, *x_right);
+    fscanf(f,"%lf%lf", a, b);
+    //printf("a=%4.4lf b=%4.4lf\n", *a, *b);
     fclose(f);
 }
 
-void the_golden_ratio_max(double a[], double x_left, double x_right, double e) {
-    double x1=x_left+z*(x_right-x_left);
-    double x2=x_left+(1-z)*(x_right-x_left);
-    double func;
-    if(f(a, x1) >= f(a, x2)) func = f(a, x1);
-    condition(x_left, x_right, e);
+void the_golden_ratio_min(double a, double b, double e) {
+    int count = 1;
+    printf("e=%4.4lf\n", e);
+    double x1=a+z*(b-a);
+    double x2=b+z*(a-b);
+    printf("a=%-20.8lf b=%-20.8lf\nx1=%-19.8lf x2=%-19.8lf\nf(x1)=%-15.8lf f(x2)=%-.8lf\nend_condition=%-.8lf\n",a,b,x1,x2,f(x1),f(x2),(b-a)/2);
+    while((b-a)/2 > e) {
+        count++;
+        if(f(x1) < f(x2)) {
+            b = x2;
+            x2 = x1;
+            x1 = a+z*(b-a);
+        } else if (f(x1) > f(x2)) {
+            a = x1;
+            x1 = x2;
+            x2 = b+z*(a-b);
+        } else if (f(x1) == f(x2)){
+            a = x1;
+            b = x2;
+            x1 = a+z*(b-a);
+            x2 = b+z*(a-b);
+        }
+        printf("a=%-20.8lf b=%-20.8lf\nx1=%-19.8lf x2=%-19.8lf\nf(x1)=%-15.8lf f(x2)=%-.8lf\nend_condition=%-.8lf\n",a,b,x1,x2,f(x1),f(x2),(b-a)/2);
+    }
+    printf("count=%d\n", count);
+    if(f(x1) < f(x2)){
+        printf("\nmin=%4.8lf\n\n", x1);
+    } else if(f(x1) > f(x2)){
+        printf("\nmin=%4.8lf\n\n", x2);
+    }
 }
 
-void condition(double a, double b, double e) {
-    int flag = 0;
-    if (b-a/2<=e) flag = 1;
-    return flag;
-}
+/*double f(double x) {
+    return -exp(k[0]+k[1]*x+k[2]*x*x);
+}*/
 
-double f(double a[], double x) {
-    return a[0]+a[1]*x+a[2]*sin(a[3]*x);
+
+double f(double x) {
+    return k[0]+k[1]*x+k[2]*sin(k[3]*x);
 }
