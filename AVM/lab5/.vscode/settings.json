@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "stdlib.h": "c",
+        "iosfwd": "cpp",
+        "numbers": "cpp",
+        "algorithm": "cpp",
+        "ostream": "cpp"
+    }
+}
