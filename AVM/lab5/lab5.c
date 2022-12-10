@@ -41,10 +41,16 @@ double k[N];
 int main() {
     double a, b;
     reading_data(&a, &b);
-    double e[] = {0.1,0.01,0.001,0.0001};
-    //the_golden_ratio_min(a, b, e[2]);//3task
-    for(int i = 0; i < N; i++) {
-        the_golden_ratio_min(a, b, e[i]);//4task
+    double e[] = {0.5, 0.1,0.01,0.001,0.0001};
+    for(double a1=a; a1<b; a1+=(b-a)/4){
+        printf("e=%4.4lf\n", e[0]);
+        the_golden_ratio_min(a1, a1+(b-a)/4, e[0]);//3task
+    }
+    for(int i = 1; i < 5; i++) {
+        printf("e=%4.4lf\n", e[i]);
+        for(double a1=a; a1<b; a1+=(b-a)/4){
+            the_golden_ratio_min(a1, a1+(b-a)/4, e[i]);//4task
+        }
     }
     return 0;
 }
@@ -62,10 +68,10 @@ void reading_data(double* a, double* b) {
 
 void the_golden_ratio_min(double a, double b, double e) {
     int count = 1;
-    printf("e=%4.4lf\n", e);
     double x1=a+z*(b-a);
     double x2=b+z*(a-b);
-    printf("a=%-20.8lf b=%-20.8lf\nx1=%-19.8lf x2=%-19.8lf\nf(x1)=%-15.8lf f(x2)=%-.8lf\nend_condition=%-.8lf\n",a,b,x1,x2,f(x1),f(x2),(b-a)/2);
+    //printf("a=%-20.8lf b=%-20.8lf\nx1=%-19.8lf x2=%-19.8lf\n",a,b,x1,x2);
+    //printf("f(x1)=%-15.8lf f(x2)=%-.8lf\nend_condition=%-.8lf\n",f(x1),f(x2),(b-a)/2);
     while((b-a)/2 > e) {
         count++;
         if(f(x1) < f(x2)) {
@@ -82,13 +88,14 @@ void the_golden_ratio_min(double a, double b, double e) {
             x1 = a+z*(b-a);
             x2 = b+z*(a-b);
         }
-        printf("a=%-20.8lf b=%-20.8lf\nx1=%-19.8lf x2=%-19.8lf\nf(x1)=%-15.8lf f(x2)=%-.8lf\nend_condition=%-.8lf\n",a,b,x1,x2,f(x1),f(x2),(b-a)/2);
+        //printf("a=%-20.8lf b=%-20.8lf\nx1=%-19.8lf x2=%-19.8lf\n",a,b,x1,x2);
+        //printf("f(x1)=%-15.8lf f(x2)=%-.8lf\nend_condition=%-.8lf\n",f(x1),f(x2),(b-a)/2);
     }
     printf("count=%d\n", count);
     if(f(x1) < f(x2)){
-        printf("\nmin=%4.8lf\n\n", x1);
+        printf("a=%4.8lf b=%4.8lf min=%4.8lf\n", a, b, x1);
     } else if(f(x1) > f(x2)){
-        printf("\nmin=%4.8lf\n\n", x2);
+        printf("a=%4.8lf b=%4.8lf min=%4.8lf\n",a, b, x2);
     }
 }
 
@@ -98,5 +105,5 @@ void the_golden_ratio_min(double a, double b, double e) {
 
 
 double f(double x) {
-    return k[0]+k[1]*x+k[2]*sin(k[3]*x);
+    return k[0]-k[1]*x+k[2]*sin(k[3]*x);
 }
