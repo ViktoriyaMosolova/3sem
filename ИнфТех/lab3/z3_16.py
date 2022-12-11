@@ -7,7 +7,7 @@ b = 4
 c = 3
 y = 6
 
-step = (4*pi-pi)/(0.05*pi)
+step = int((4*pi-pi)/(0.05*pi))
 x0 = pi
 print(step)
 for i in range(step):
