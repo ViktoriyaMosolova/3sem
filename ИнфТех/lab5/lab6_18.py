@@ -47,7 +47,7 @@ def file():
         f.close()
     except FileNotFoundError:
         print("Не найден исходный файл data.txt. Создайте его и\nвведите значения p и sv таким образом:\n"
-                "Values p: 5.4, 42\nValues sv: 5, 6.1\n")
+                "Values p: 5.4 42\nValues sv: 5 6.1\n")
     except ValueError:
         print("В файле присутствует неправильное значение\nВведите значения p и sv таким образом:\n"
             "Values p: 10 20 5\nValues sv: 10 20 5\n")
@@ -57,9 +57,9 @@ def input_stdin():
     try:
         print("Введите диапазон p и шаг:")
         p=input()
-        p=list(map(float, p.split(sep=" ")))
         print("Введите диапазон СВ и шаг:")
         sv=input()
+        p=list(map(float, p.split(sep=" ")))
         sv=list(map(float, sv.split(sep=" ")))
         step_p=int((p[1]-p[0])/p[2])
         step_sv=int((sv[1]-sv[0])/sv[2])
@@ -76,9 +76,13 @@ def input_stdin():
             input_stdin()
     except ValueError:
         print("В файле присутствует неправильное значение\nВведите значения p и sv таким образом:\n"
-            "Values p:\n5.4, 42\nValues sv:\n5, 6.1\n")
+            "Values p:\n5 42 2\nValues sv:\n5 60 5\n")
         input_stdin()
-
+    except KeyboardInterrupt:
+        print("В файле присутствует неправильное значение\nВведите значения p и sv таким образом:\n"
+            "Values p:\n5 42 2\nValues sv:\n5 60 5\n")
+        input_stdin()
+        
 def func():
     print("Введите 1 или 2 или 3:\n1.Ввод с файла\n2.Ввод с консоли\n3.Закрыть программу((")
     try:
