@@ -3,4 +3,4 @@ git add .
 git status
 DATE = echo $(date)
 git commit -m "$(DATE)"
-git push origin master
+git push origin develop
