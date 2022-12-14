@@ -46,10 +46,10 @@ if (len(sv)!=3 or len(t)!=3):
     exit(1)
 
 flag=0
-if ((t[0] or t[1]) < -273.15):
+if ((t[0] < -273.15) or (t[1] < -273.15)):
     print("input_console:Температура не может быть менее -273.15oC\n")
     flag=1
-if ((sv[0] or sv[1]) < 0) or ((sv[0] or sv[1]) > 100):
+if ((sv[0] < 0) or (sv[1] < 0) or (sv[0] > 100) or (sv[1] > 100)):
     print("input_console:Значение концентрации не может быть более 100% или менее 0%\n")
     flag=1
 if flag==1: 
@@ -69,19 +69,22 @@ try:
         t0=t[0]+i*t[2]
         for j in range(step_sv+1):
             sv0=sv[0]+j*sv[2]
-            print(f"t(oC)={t0:<8}sv(%)={sv0:<8}n(sP)={computation(t0, sv0):<8.3}")
+            print(f"t(oC)={t0:<12.3f}sv(%)={sv0:<12.3f}n(sP)={computation(t0, sv0):<12.3f}")
     dt=[40,50,30]
     dsv=[0,50,30]
     n_real=[0.65,4.94,2.5]
     for i in range(3):
         n_comp=computation(dt[i], dsv[i])
         dn=abs((n_real[i] - n_comp) * 100)
-        print(f"t(oC)={dt[i]:<8}sv(%)={dsv[i]:<8}n_real(sP)={n_real[i]:<8.3}n_comp(sP)={n_comp:<8.3}n_error(%)={dn:<8.3}")
-except ValueError:
-    print("input_console:Не может быть вычислена функция")
-    exit(1)
+        print(f"t(oC)={dt[i]:<12.3f}sv(%)={dsv[i]:<12.3f}n_real(sP)={n_real[i]:<12.3f}n_comp(sP)={n_comp:<12.3f}n_error(%)={dn:<12.3}")
 except OverflowError:
     print("input_console:Слишком большой результат")
+    exit(1)
+except KeyboardInterrupt:
+    print("input_console:Не нажимайте клавиши для прерывания процесса!!\n")
+    exit(1)
+except EOFError:
+    print("input_console:Неожиданный символ конца файла!!\n")
     exit(1)
 
 
@@ -97,8 +100,8 @@ except ValueError:
 except FileNotFoundError:
     print("input_file:Не удалось найти файл")
     exit(1)
-except EOFError:
-    print("input_file:Неожиданный символ конца файла!!\n")
+except OSError:
+    print("input_file:Системная ошибка\n")
     exit(1)
 
 if (len(sv_f)!=3 or len(t_f)!=3):
@@ -107,10 +110,10 @@ if (len(sv_f)!=3 or len(t_f)!=3):
     exit(1)
 
 flag=0
-if ((t_f[0] or t_f[1]) < -273.15):
+if ((t_f[0] < -273.15) or (t_f[1] < -273.15)):
     print("input_file:Температура не может быть менее -273.15oC\n")
     flag=1
-if ((sv_f[0] or sv_f[1]) < 0) or ((sv_f[0] or sv_f[1]) > 100):
+if ((sv_f[0] < 0) or (sv_f[1] < 0) or (sv_f[0] > 100) or (sv_f[1] > 100)):
     print("input_file:Значение концентрации не может быть более 100% или менее 0%\n")
     flag=1
 if flag==1: 
@@ -131,20 +134,15 @@ with open("output_file.txt", "w") as f:
             t0_f=t_f[0]+i*t_f[2]
             for j in range(step_sv_f+1):
                 sv0_f=sv_f[0]+j*sv_f[2]
-                f.write(f"t(oC)={t0_f:<8}sv(%)={sv0_f:<8}n(sP)={computation(t0_f, sv0_f):<8.3}\n")
+                f.write(f"t(oC)={t0_f:<12.3f}sv(%)={sv0_f:<12.3f}n(sP)={computation(t0_f, sv0_f):<12.3f}\n")
         dt_f=[40,50,30]
         dsv_f=[0,50,30]
         n_real_f=[0.65,4.94,2.5]
         for i in range(3):
             n_comp_f=computation(dt_f[i], dsv_f[i])
             dn_f=abs((n_real_f[i] - n_comp_f) * 100)
-            f.write(f"t(oC)={dt_f[i]:<8}sv(%)={dsv_f[i]:<8}n_real(sP)={n_real_f[i]:<8.3}n_comp(sP)={n_comp_f:<8.3}n_error(%)={dn_f:<8.3}\n")
-    except ValueError:
-        print("input_file:Не может быть вычислена функция")
-        exit(1)
+            f.write(f"t(oC)={dt_f[i]:<12.3f}sv(%)={dsv_f[i]:<12.3f}n_real(sP)={n_real_f[i]:<12.3f}n_comp(sP)={n_comp_f:<12.3f}n_error(%)={dn_f:<12.3f}\n")
     except OverflowError:
         print("input_file:Слишком большой результат")
         exit(1)
 f.close()
-
-
