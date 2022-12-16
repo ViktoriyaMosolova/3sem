@@ -1,11 +1,11 @@
 FLAG = -Wall -Werror -Wextra
-CC = gcc
-SRC = lab5.c
+CC = g++
+SRC = lab5.cpp
 Q1 = lab5
 
 all: lab5
 
-lab5: lab5.c
+lab5: lab5.cpp
 	$(CC) $(FLAG) $(SRC) -o $(Q1)
 	./lab5.exe
 

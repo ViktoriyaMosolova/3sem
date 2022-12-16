@@ -12,6 +12,9 @@ from scipy.linalg import solve
 A = array([ [4,5,1/2],
             [1/10,40,1],
             [1,-5,-2] ])
+A = array([ [1,2,3],
+            [4,5,6],
+            [7,8,9.0000001] ])
 b = array([0,5,10])
 x=solve(A,b)
 print(x)

@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <fstream>
-#include<iomanip>
+#include <iomanip>
 #define N 4
 #define z 0.382
 

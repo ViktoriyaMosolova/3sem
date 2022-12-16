@@ -3,14 +3,15 @@
 '''10. Создать трёхдиагональную матрицу 10*10 из 5 на главной диагонали, 4 над главной диагональю
 и 1 под ней. '''
 
-import numpy
+import numpy as np
 
 n=10
 
-mas = numpy.zeros(n*n, dtype=int)
+mas = np.zeros(n*n, dtype=int)
 mas[0::n+1] = 5
 mas[1::n+1] = 4
 mas[n::n+1] = 1
+
 a = mas.reshape(n,n) 
 
 print(f'{a}\n') #вывод матрицы
